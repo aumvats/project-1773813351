@@ -21,10 +21,12 @@ export function getAnonCount(): number {
 export function incrementAnonCount(): void {
   if (typeof window === "undefined") return;
   const count = getAnonCount();
-  localStorage.setItem(
-    STORAGE_KEY,
-    JSON.stringify({ count: count + 1, date: new Date().toDateString() })
-  );
+  try {
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify({ count: count + 1, date: new Date().toDateString() })
+    );
+  } catch { /* storage unavailable — anon limit tracking disabled */ }
 }
 
 export function resetAnonCount(): void {
