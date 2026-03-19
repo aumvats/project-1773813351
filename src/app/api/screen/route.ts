@@ -57,7 +57,7 @@ export async function POST(request: Request) {
     // Rate limit check for authenticated users
     if (user) {
       const { data: profile } = await supabase
-        .from("profiles")
+        .from("allclear_profiles")
         .select("*")
         .eq("id", user.id)
         .single();
@@ -72,7 +72,7 @@ export async function POST(request: Request) {
         if (isNewDay) {
           screeningsToday = 0;
           await supabase
-            .from("profiles")
+            .from("allclear_profiles")
             .update({
               screenings_today: 0,
               screenings_reset_at: now.toISOString(),
@@ -99,12 +99,12 @@ export async function POST(request: Request) {
       // Increment counter for auth users even on cache hit
       if (user) {
         const { data: p } = await supabase
-          .from("profiles")
+          .from("allclear_profiles")
           .select("screenings_today")
           .eq("id", user.id)
           .single();
         await supabase
-          .from("profiles")
+          .from("allclear_profiles")
           .update({ screenings_today: (p?.screenings_today ?? 0) + 1 })
           .eq("id", user.id);
       }
@@ -139,13 +139,13 @@ export async function POST(request: Request) {
     // Increment screening counter for auth users
     if (user) {
       const { data: profile } = await supabase
-        .from("profiles")
+        .from("allclear_profiles")
         .select("screenings_today")
         .eq("id", user.id)
         .single();
 
       await supabase
-        .from("profiles")
+        .from("allclear_profiles")
         .update({
           screenings_today: (profile?.screenings_today ?? 0) + 1,
         })

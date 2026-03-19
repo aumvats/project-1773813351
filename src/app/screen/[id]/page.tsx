@@ -47,7 +47,7 @@ export default function ScreeningDetailPage({
       try {
         const supabase = createClient();
         const { data, error: fetchError } = await supabase
-          .from("screenings")
+          .from("allclear_screenings")
           .select("*")
           .eq("id", id)
           .eq("user_id", user.id)
@@ -84,7 +84,7 @@ export default function ScreeningDetailPage({
       // Save new screening
       const supabase = createClient();
       const { data: newScreening, error: insertError } = await supabase
-        .from("screenings")
+        .from("allclear_screenings")
         .insert({
           user_id: user.id,
           query: screening.query,

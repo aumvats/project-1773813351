@@ -52,8 +52,8 @@ export default function SettingsPage() {
     try {
       const supabase = createClient();
       // Delete screenings first, then profile
-      await supabase.from("screenings").delete().eq("user_id", user!.id);
-      await supabase.from("profiles").delete().eq("id", user!.id);
+      await supabase.from("allclear_screenings").delete().eq("user_id", user!.id);
+      await supabase.from("allclear_profiles").delete().eq("id", user!.id);
       await signOut();
       toast("success", "Account deleted.");
       router.push("/");

@@ -30,7 +30,7 @@ export default function HistoryPage() {
       try {
         const supabase = createClient();
         let query = supabase
-          .from("screenings")
+          .from("allclear_screenings")
           .select("*")
           .eq("user_id", user.id)
           .order("created_at", { ascending: false });

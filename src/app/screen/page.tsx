@@ -117,7 +117,7 @@ function ScreenPageContent() {
 
       const status = results.length === 0 ? "clear" : "flagged";
 
-      const { error: insertError } = await supabase.from("screenings").insert({
+      const { error: insertError } = await supabase.from("allclear_screenings").insert({
         user_id: user.id,
         query,
         result_snapshot: snapshot,

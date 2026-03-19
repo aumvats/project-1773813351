@@ -36,7 +36,7 @@ export default function ReportPage({
       try {
         const supabase = createClient();
         const { data, error: fetchError } = await supabase
-          .from("screenings")
+          .from("allclear_screenings")
           .select("*")
           .eq("id", id)
           .eq("user_id", user.id)
