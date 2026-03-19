@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAuth } from "./AuthProvider";
 import { Button } from "@/components/ui/Button";
-import { createClient } from "@/lib/supabase/client";
 import { cn } from "@/lib/utils/cn";
 
 const navLinks = [
@@ -18,16 +17,6 @@ export function Header() {
   const { user, loading, signOut } = useAuth();
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  async function handleSignIn() {
-    const supabase = createClient();
-    await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        redirectTo: `${window.location.origin}/api/auth/callback`,
-      },
-    });
-  }
 
   return (
     <header className="border-b border-border-col bg-white sticky top-0 z-20">
@@ -84,9 +73,9 @@ export function Header() {
               </button>
             </>
           ) : (
-            <Button size="sm" onClick={handleSignIn}>
-              Sign in
-            </Button>
+            <Link href="/screen">
+              <Button size="sm">Sign in</Button>
+            </Link>
           )}
         </div>
       </div>
