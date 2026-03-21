@@ -74,7 +74,7 @@ export function Header() {
             </>
           ) : (
             <Link href="/screen">
-              <Button size="sm">Sign in</Button>
+              <Button size="sm">Start Screening</Button>
             </Link>
           )}
         </div>
